@@ -1,6 +1,8 @@
 services:
    webapi:
-      build: .
+      build:
+         context: .
+         dockerfile: Dockerfile
       ports: 
          - "80:80"
       depends_on: 
@@ -10,6 +12,6 @@ services:
       volumes:
          - /var/lib/postgres/data
       environment:
-         POSTGRES_PASSWORD: minhasupersenha
+         POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       ports:
          - "5432:5432"
