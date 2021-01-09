@@ -4,13 +4,13 @@ WORKDIR /src
 
 # Copia os arquivos .csproj para suas respectivas pastas e restaura os pacotes 
 COPY Mensagens.Dominio/*.csproj Mensagens.Dominio/
-COPY Mensagens.WebApi/*.csproj Mensagens.WebApi/
-RUN dotnet restore Mensagens.WebApi/Mensagens.WebApi.csproj
+COPY Mensagens.Webapi/*.csproj Mensagens.Webapi/
+RUN dotnet restore Mensagens.Webapi/Mensagens.Webapi.csproj
 
 # Copia todo o conteúdo das pastas e realiza o build do projeto
 COPY Mensagens.Dominio/ Mensagens.Dominio/
-COPY Mensagens.WebApi/ Mensagens.WebApi/
-WORKDIR Mensagens.WebApi/
+COPY Mensagens.Webapi/ Mensagens.Webapi/
+WORKDIR Mensagens.Webapi/
 RUN dotnet build -c release --no-restore
 
 # Após realizar o build, publish da solução no diretório app
@@ -22,4 +22,4 @@ RUN dotnet publish -c release --no-build -o app/
 FROM mcr.microsoft.com/dotnet/runtime:5.0
 WORKDIR app/
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "Mensagens.WebApi.dll"]
+ENTRYPOINT ["dotnet", "Mensagens.Webapi.dll"]
