@@ -3,12 +3,14 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 
 # Copia os arquivos .csproj para suas respectivas pastas e restaura os pacotes 
-COPY Mensagens.Dominio/*.csproj Mensagens.Dominio/
+COPY Mensagens.Dominio/*.csproj Mensagens.Dominio/ 
+COPY Mensagens.Infra/*.csproj Mensagens.Infra/
 COPY Mensagens.Webapi/*.csproj Mensagens.Webapi/
 RUN dotnet restore Mensagens.Webapi/Mensagens.Webapi.csproj
 
 # Copia todo o conteúdo das pastas e realiza o build do projeto
 COPY Mensagens.Dominio/ Mensagens.Dominio/
+COPY Mensagens.Infra/ Mensagens.Infra/
 COPY Mensagens.Webapi/ Mensagens.Webapi/
 WORKDIR Mensagens.Webapi/
 RUN dotnet build -c release --no-restore
