@@ -15,7 +15,7 @@ RUN dotnet build -c release --no-restore
 
 # Após realizar o build, publish da solução no diretório app
 FROM build AS publish
-RUN dotnet publish -c release --no-build -o app/
+RUN dotnet publish -c release --no-build -o /app
 
 # Agora utilizando a imagem do .NET Runtime, copia os assemblies 
 # gerados na publicação e executa a nossa aplicação 
