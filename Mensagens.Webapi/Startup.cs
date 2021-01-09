@@ -21,7 +21,7 @@ namespace Mensagens.Webapi
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("PostgreSQL");
-            services.AddDbContext<MensagensContext>(options => options.UseNpgsql(connectionString));
+            services.AddDbContext<MyContext>(options => options.UseNpgsql(connectionString));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

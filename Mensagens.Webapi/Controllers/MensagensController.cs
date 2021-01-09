@@ -12,9 +12,9 @@ namespace Mensagens.Webapi.Controllers
     public class MensagensController : ControllerBase
     {
 
-        private readonly MensagensContext _context;
+        private readonly MyContext _context;
 
-        public MensagensController(MensagensContext context)
+        public MensagensController(MyContext context)
         {
             _context = context;
         }

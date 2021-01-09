@@ -2,15 +2,17 @@
 using Mensagens.Infra.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Mensagens.Infra.Migrations
 {
-    [DbContext(typeof(MensagensContext))]
-    partial class MensagensContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(MyContext))]
+    [Migration("20210109161431_migracao_inicial")]
+    partial class migracao_inicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
