@@ -10,7 +10,12 @@ namespace Mensagens.Webapi.Controllers
     public class MensagensController : ControllerBase
     {
 
-        private static IList<Mensagem> _mensagens;
+        private static IList<Mensagem> _mensagens = new List<Mensagem>
+        {
+            new Mensagem { Id = 1, Texto = "Exemplo de mensagem 1" },
+            new Mensagem { Id = 2, Texto = "Exemplo de mensagem 2" },
+            new Mensagem { Id = 3, Texto = "Exemplo de mensagem 3" },
+        };
 
         [Route("")]
         [HttpGet]
