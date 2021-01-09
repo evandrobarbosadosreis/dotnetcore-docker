@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Mensagens.Dominio\Mensagens.Dominio.csproj" />
+    <ProjectReference Include="..\Mensagens.Infra\Mensagens.Infra.csproj" />
   </ItemGroup>
 
 </Project>

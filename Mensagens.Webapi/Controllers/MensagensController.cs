@@ -1,6 +1,8 @@
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using Mensagens.Dominio.Modelos;
+using Mensagens.Infra.Contexto;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mensagens.Webapi.Controllers
 {
@@ -10,26 +12,27 @@ namespace Mensagens.Webapi.Controllers
     public class MensagensController : ControllerBase
     {
 
-        private static IList<Mensagem> _mensagens = new List<Mensagem>
+        private readonly MensagensContext _context;
+
+        public MensagensController(MensagensContext context)
         {
-            new Mensagem { Id = 1, Texto = "Exemplo de mensagem 1" },
-            new Mensagem { Id = 2, Texto = "Exemplo de mensagem 2" },
-            new Mensagem { Id = 3, Texto = "Exemplo de mensagem 3" },
-        };
+            _context = context;
+        }
 
         [Route("")]
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok(_mensagens);
+            var mensagens = await _context.Mensagens.ToListAsync();
+            return Ok(mensagens);
         }
 
         [Route("")]
         [HttpPost]
-        public IActionResult Post(Mensagem mensagem)
+        public async Task<IActionResult> Post(Mensagem mensagem)
         {
-            mensagem.Id = _mensagens.Count + 1;
-            _mensagens.Add(mensagem);
+            await _context.AddAsync(mensagem);
+            await _context.SaveChangesAsync();
             return Ok(mensagem);
         }
         

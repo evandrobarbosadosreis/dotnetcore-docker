@@ -1,5 +1,7 @@
+using Mensagens.Infra.Contexto;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -18,6 +20,8 @@ namespace Mensagens.Webapi
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = Configuration.GetConnectionString("PostgreSQL");
+            services.AddDbContext<MensagensContext>(options => options.UseNpgsql(connectionString));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
