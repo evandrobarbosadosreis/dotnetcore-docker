@@ -1,4 +1,4 @@
-# A imagem base do .NET SDK
+# Utilizando como base a imagem base do .NET SDK
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 
@@ -20,6 +20,6 @@ RUN dotnet publish -c release --no-build -o app/
 # Agora utilizando a imagem do .NET Runtime, copia os assemblies 
 # gerados na publicação e executa a nossa aplicação 
 FROM mcr.microsoft.com/dotnet/runtime:5.0
-WORKDIR app/
+WORKDIR /app
 COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "Mensagens.Webapi.dll"]
